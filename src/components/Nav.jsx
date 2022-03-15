@@ -1,9 +1,9 @@
 import React from "react";
 import logo from "../images/logo-oval.svg";
-const Nav = ({ minimal, authToken, setShowModal, showModal }) => {
+const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignUp }) => {
 	const handleClick = () => {
 		setShowModal(true);
-    console.log(123);
+    setIsSignUp(false);
 	};
 	return (
 		<div className="nav">

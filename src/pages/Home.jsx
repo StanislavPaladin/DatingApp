@@ -4,17 +4,25 @@ import Nav from "../components/Nav";
 
 const Home = () => {
 	const [showModal, setShowModal] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
 	const authToken = false;
 	const minimal = false;
 
 	const handleClick = () => {
 		setShowModal(true);
+    setIsSignUp(true);
 	};
 	return (
 		<div className="overlay">
-			<Nav minimal={minimal} authToken={authToken} setShowModal={setShowModal} showModal={showModal}/>
+			<Nav
+				minimal={minimal}
+				authToken={authToken}
+				setShowModal={setShowModal}
+        setIsSignUp={setIsSignUp}
+				showModal={showModal}
+			/>
 			<div className="home">
-				<h1>Swipe Right</h1>
+				<h1 className="primary-title">Swipe Right</h1>
 				<button
 					className="primary-button"
 					onClick={handleClick}
@@ -27,8 +35,9 @@ const Home = () => {
 				{showModal && !minimal && (
 					<AuthModal
 						setShowModal={setShowModal}
-            authToken={authToken}
-            minimal={minimal}
+            isSignUp={isSignUp}
+						authToken={authToken}
+						minimal={minimal}
 					/>
 				)}
 			</div>
