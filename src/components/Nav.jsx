@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../images/logo-oval.svg";
-const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignUp }) => {
+const Nav = ({ minimal, setShowModal, showModal, setIsSignUp }) => {
+  const authToken = false;
+
 	const handleClick = () => {
 		setShowModal(true);
     setIsSignUp(false);
@@ -14,7 +16,7 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignUp }) => {
 					alt=""
 				/>
 			</div>
-			{!authToken && (
+			{!authToken && !minimal && (
 				<button
 					disabled={showModal}
 					onClick={handleClick}
