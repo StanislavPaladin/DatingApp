@@ -3,17 +3,17 @@ import Nav from "../components/Nav";
 
 const Onboarding = () => {
 	const [formData, setFormData] = useState({
-		user_id: '',
-		first_name: '',
-		dob_day: '',
-		dob_month: '',
-		dob_year: '',
-		show_gender: '',
-		gender_identity: '',
-		gender_interest: '',
-		email: '',
-		about: '',
-		matches: []
+		user_id: "",
+		first_name: "",
+		dob_day: "",
+		dob_month: "",
+		dob_year: "",
+		show_gender: "",
+		gender_identity: "",
+		gender_interest: "",
+		email: "",
+		about: "",
+		matches: [],
 	});
 
 	const handleSubmit = (e) => {
@@ -21,30 +21,21 @@ const Onboarding = () => {
 		console.log(formData);
 	};
 	const handleChange = (e) => {
-		const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+		const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 		const name = e.target.name;
 		setFormData((prevState) => ({
-			...prevState, [name] : value
+			...prevState,
+			[name]: value,
 		}));
 	};
 	return (
 		<div>
-			<Nav
-				minimal={true}
-				setShowModal={() => {}}
-				showModal={false}
-			/>
+			<Nav minimal={true} setShowModal={() => {}} showModal={false} />
 			<div className="onboarding">
 				<h2>CREATE ACCOUNT</h2>
-				<form
-					action=""
-					onSubmit={handleSubmit}
-					className="onboarding-form"
-				>
+				<form action="" onSubmit={handleSubmit} className="onboarding-form">
 					<section>
-						<label htmlFor="first_name">
-							First Name
-						</label>
+						<label htmlFor="first_name">First Name</label>
 						<input
 							className="w-75"
 							type="text"
@@ -55,9 +46,7 @@ const Onboarding = () => {
 							value={formData.first_name}
 							onChange={handleChange}
 						/>
-						<label htmlFor="dob_day">
-							Birthday
-						</label>
+						<label htmlFor="dob_day">Birthday</label>
 						<div className="multiple-input-container-row">
 							<input
 								type="number"
@@ -66,9 +55,7 @@ const Onboarding = () => {
 								placeholder="DD"
 								required={true}
 								value={formData.dob_day}
-								onChange={
-									handleChange
-								}
+								onChange={handleChange}
 							/>
 							<input
 								type="number"
@@ -77,9 +64,7 @@ const Onboarding = () => {
 								placeholder="MM"
 								required={true}
 								value={formData.dob_month}
-								onChange={
-									handleChange
-								}
+								onChange={handleChange}
 							/>
 							<input
 								type="number"
@@ -88,14 +73,10 @@ const Onboarding = () => {
 								placeholder="YYYY"
 								required={true}
 								value={formData.dob_year}
-								onChange={
-									handleChange
-								}
+								onChange={handleChange}
 							/>
 						</div>
-						<label htmlFor="show-gender">
-							My gender
-						</label>
+						<label htmlFor="show-gender">My gender</label>
 						<div className="multiple-input-container-row">
 							<input
 								type="radio"
@@ -103,46 +84,32 @@ const Onboarding = () => {
 								id="man-gender-identity"
 								placeholder="Gender"
 								value="man"
-								onChange={
-									handleChange
-								}
-								checked={formData.gender_identity === 'man'}
+								onChange={handleChange}
+								checked={formData.gender_identity === "man"}
 							/>
-							<label htmlFor="man-gender-identity">
-								Man
-							</label>
+							<label htmlFor="man-gender-identity">Man</label>
 							<input
 								type="radio"
 								name="gender_identity"
 								id="woman-gender-identity"
 								placeholder="Gender"
 								value="woman"
-								onChange={
-									handleChange
-								}
-								checked={formData.gender_identity === 'woman'}
+								onChange={handleChange}
+								checked={formData.gender_identity === "woman"}
 							/>
-							<label htmlFor="woman-gender-identity">
-								Woman
-							</label>
+							<label htmlFor="woman-gender-identity">Woman</label>
 							<input
 								type="radio"
 								name="gender_identity"
 								id="more-gender-identity"
 								placeholder="Gender"
 								value="more"
-								onChange={
-									handleChange
-								}
-								checked={formData.gender_identity === 'more'}
+								onChange={handleChange}
+								checked={formData.gender_identity === "more"}
 							/>
-							<label htmlFor="more-gender-identity">
-								More
-							</label>
+							<label htmlFor="more-gender-identity">More</label>
 						</div>
-						<label htmlFor="show_gender">
-							Show my gender?
-						</label>
+						<label htmlFor="show_gender">Show my gender?</label>
 						<input
 							type="checkbox"
 							name="show_gender"
@@ -150,53 +117,37 @@ const Onboarding = () => {
 							onChange={handleChange}
 							checked={formData.show_gender}
 						/>
-						<label>
-							Show me
-						</label>
+						<label>Show me</label>
 						<div className="multiple-input-container-row">
 							<input
 								type="radio"
 								name="gender_interest"
 								id="man-gender-interest"
-								value='man'
-								onChange={
-									handleChange
-								}
-								checked={formData.gender_interest === 'man'}
+								value="man"
+								onChange={handleChange}
+								checked={formData.gender_interest === "man"}
 							/>
-							<label htmlFor="man-gender-interest">
-								Man
-							</label>
+							<label htmlFor="man-gender-interest">Man</label>
 							<input
 								type="radio"
 								name="gender_interest"
 								id="woman-gender-interest"
-								value='woman'
-								onChange={
-									handleChange
-								}
-								checked={formData.gender_interest === 'woman'}
+								value="woman"
+								onChange={handleChange}
+								checked={formData.gender_interest === "woman"}
 							/>
-							<label htmlFor="woman-gender-interest">
-								Woman
-							</label>
+							<label htmlFor="woman-gender-interest">Woman</label>
 							<input
 								type="radio"
 								name="gender_interest"
 								id="everyone-gender-interest"
-								value='everyone'
-								onChange={
-									handleChange
-								}
-								checked={formData.gender_interest === 'everyone'}
+								value="everyone"
+								onChange={handleChange}
+								checked={formData.gender_interest === "everyone"}
 							/>
-							<label htmlFor="everyone-gender-interest">
-								Everyone
-							</label>
+							<label htmlFor="everyone-gender-interest">Everyone</label>
 						</div>
-						<label htmlFor="about">
-							About me
-						</label>
+						<label htmlFor="about">About me</label>
 						<input
 							className="w-75"
 							type="text"
@@ -207,14 +158,12 @@ const Onboarding = () => {
 							value={formData.about}
 							onChange={handleChange}
 						/>
-						<input type="submit" onClick={handleSubmit}/>
+						<input type="submit" onClick={handleSubmit} />
 					</section>
 					<section>
-						<label htmlFor="profile-photo">
-							Profile Photo
-						</label>
-						<input 
-						className="w-75"
+						<label htmlFor="profile-photo">Profile Photo</label>
+						<input
+							className="w-75"
 							type="url"
 							name="url"
 							id="url"
