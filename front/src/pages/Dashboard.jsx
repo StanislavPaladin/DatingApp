@@ -8,18 +8,45 @@ const Dashboard = () => {
 	const [user, setUser] = useState();
 	const [lastDirection, setLastDirection] = useState(null);
 	const [genderedUsers, setGenderedUsers] = useState();
+	const [swipedUser, setSwipedUser] = useState();
 	const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
 	const userId = cookies.userId;
 
-	const swiped = (direction, nameToDelete) => {
-		console.log("removing: " + nameToDelete);
+	const updateMatches = async (matchedUserId) => {
+		try {
+			await axios.put("http://localhost:8000/addmatch", {
+				userId,
+				matchedUserId,
+			});
+			getUser();
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const swiped = (direction, swipedUserId) => {
+		if (direction === "right") {
+			updateMatches(swipedUserId);
+			setSwipedUser(swipedUserId);
+		}
 		setLastDirection(direction);
 	};
 
 	const outOfFrame = (name) => {
 		console.log(name + " left the screen!");
 	};
+
+	const matchedUserIds = user?.matches
+		.map(({ user_id }) => user_id)
+		.concat(userId);
+
+
+
+	
+	const filteredUsers = genderedUsers?.filter(
+		(genderedUsers) => !matchedUserIds?.includes(genderedUsers)
+	);
 
 	const getUser = async () => {
 		try {
@@ -49,49 +76,25 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		getUser();
+	}, [user]);
+
+	useEffect(() => {
 		getGenderedUsers();
-	}, [user, genderedUsers]);
-
-	console.log(user);
-	console.log(genderedUsers);
-
-	// mocked data
-	const characters = [
-		{
-			name: "Richard Hendricks",
-			url: "https://i.imgur.com/Q9WPlWA.jpeg",
-		},
-		{
-			name: "Erlich Bachman",
-			url: "https://i.imgur.com/MWAcQRM.jpeg",
-		},
-		{
-			name: "Monica Hall",
-			url: "https://i.imgur.com/wDmRJPc.jpeg",
-		},
-		{
-			name: "Jared Dunn",
-			url: "https://i.imgur.com/OckVkRo.jpeg",
-		},
-		{
-			name: "Dinesh Chugtai",
-			url: "https://i.imgur.com/Q9WPlWA.jpeg",
-		},
-	];
+	}, [genderedUsers]);
 
 	return (
 		<>
 			{user && (
 				<div className="dashboard">
-					<ChatContainer user={user} />
+					<ChatContainer user={user} swipedUser={swipedUser} />
 					<div className="swiper-container">
 						<div className="card-container">
-							{characters.map((character) => (
+							{filteredUsers?.map((character) => (
 								<TinderCard
 									className="swipe"
-									key={character.name}
-									onSwipe={(dir) => swiped(dir, character.name)}
-									onCardLeftScreen={() => outOfFrame(character.name)}
+									key={character._id}
+									onSwipe={(dir) => swiped(dir, character.user_id)}
+									onCardLeftScreen={() => outOfFrame(character.first_name)}
 								>
 									<div
 										style={{
@@ -99,7 +102,7 @@ const Dashboard = () => {
 										}}
 										className="card"
 									>
-										<h3>{character.name}</h3>
+										<h3>{character.first_name}</h3>
 									</div>
 								</TinderCard>
 							))}
